@@ -121,4 +121,10 @@ Library = {
 		end
 	end
 }
+
+--[[
+	Essentials
+]]--
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TROLLERMASTERH/atOm-library/main/essentials.lua'))()
+
 return Library
