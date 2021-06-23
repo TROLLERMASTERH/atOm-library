@@ -1,6 +1,7 @@
 --[[
   Essentials Built-In Elements
 ]] --
+local RunService = game:GetService("RunService")
 local Elements = {
     {
         Class = "CircleLoader",
@@ -54,21 +55,7 @@ local Elements = {
                                 if newValue == true then
                                     loadstring(
                                         [[
-									while true do
-										if element.Loading == true then
-											if element.Progress == 100 then
-												element.Progress = 0
-											else
-												element.Progress = element.Progress + 1
-											end
-										else
-											break
-										end
-										if Destroyed == true then
-											break
-											end
-											wait(0.1)
-										end
+									
 									]]
                                     )()
                                 end
@@ -84,6 +71,20 @@ local Elements = {
                     }
                 }
             )
+
+            local loop
+            loop = RunService.RenderStepped:Connect(function()
+                    if element.Loading == true then
+                        if element.Progress == 100 then
+                            element.Progress = 0
+                        else
+                            element.Progress = element.Progress + 1
+                        end
+                    end
+                    if Destroyed == true then
+                        loop:Disconnect()
+                    end
+            end)
 
             return element
         end
