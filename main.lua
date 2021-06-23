@@ -5,7 +5,7 @@
 	██╔══██║░░░██║░░░██║░░██║██║╚██╔╝██║
 	██║░░██║░░░██║░░░╚█████╔╝██║░╚═╝░██║
 	╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░░░░╚═╝
-					    v.0.1
+					    v.0.01
 	Gui Library - Main
 	This is the corescript for making gui elements
 ]]--
@@ -18,7 +18,7 @@
 
 local Library
 
-local Version = 0.1
+local Version = 0.01
 
 --[[
 	Library Returnable
