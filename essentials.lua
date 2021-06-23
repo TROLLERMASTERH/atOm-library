@@ -50,16 +50,7 @@ local Elements = {
                         {
                             Property = "Loading",
                             Value = false,
-                            Occuring = true,
-                            onChange = function(newValue)
-                                if newValue == true then
-                                    loadstring(
-                                        [[
-									
-									]]
-                                    )()
-                                end
-                            end
+                            Occuring = true
                         },
                         {
                             Property = "Parent",
