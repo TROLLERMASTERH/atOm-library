@@ -73,7 +73,6 @@ local function init()
 							else
 								if typeof(value) == v.Type then
 									-- Filter Number Values
-									print(key.." += "..tostring(value))
 									if v.Type == "Number" then
 										if v.Maximum then
 											if value > v.Maximum then
