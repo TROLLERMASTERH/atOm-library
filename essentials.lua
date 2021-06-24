@@ -38,6 +38,22 @@ local Elements = {
                             end
                         },
                         {
+                            Property = "Position",
+                            Value = Bar.Position,
+                            Occuring = true,
+                            onChange = function(newValue)
+                                Bar.Position = newValue
+                            end
+                        },
+                        {
+                            Property = "AnchorPoint",
+                            Value = Bar.AnchorPoint,
+                            Occuring = true,
+                            onChange = function(newValue)
+                                Bar.AnchorPoint = newValue
+                            end
+                        },
+                        {
                             Property = "Progress",
                             Value = 0,
                             Maximum = 100,
@@ -90,7 +106,7 @@ local Elements = {
     {
         Class = "ImageTileButton",
         onCreate = function(self, elementSettings)
-            local Back = Instance.new("ImageLabel")
+            local Back = Instance.new("ImageButton")
             local Image = Instance.new("ImageLabel")
 
             --Properties:
@@ -104,6 +120,7 @@ local Elements = {
             Back.Size = UDim2.new(0, 100, 0, 100)
             Back.Image = "http://www.roblox.com/asset/?id=6992732640"
             Back.ImageColor3 = Color3.fromRGB(255, 255, 255)
+            Back.AutoButtonColor = false
 
             Image.Name = "Image"
             Image.Parent = Back
@@ -141,6 +158,28 @@ local Elements = {
                             onChange = function(newValue)
                                 Back.Parent = newValue
                             end
+                        },
+                        {
+                            Property = "Image",
+                            Value = Image.Image,
+                            onChange = function(newValue)
+                                Image.Image = newValue
+                            end
+                        },
+                        {
+                            Property = "onClick",
+                            Value = function() end,
+                            Type = "Function",
+                            onChange = function(newValue)
+                                Back.MouseButton1Click:Connect(newValue)
+                            end
+                        },
+                        {
+                            Property = "primaryColor",
+                            Value = Back.ImageColor3,
+                            onChange = function(newValue)
+                                Back.ImageColor3 = newValue
+                            end
                         }
                     }
                 }
@@ -165,7 +204,9 @@ local Elements = {
                     true
                 )
             end)
+            
 
+            
             return element
         end
     }

@@ -19,7 +19,7 @@
 local Library
 
 local Version = 0.02
-
+_G.atOm = nil
 --[[
 	Library Returnable
 ]]--
@@ -40,14 +40,15 @@ local function init()
 			table.insert(self.elementClasses, elem)
 		end,
 		createElement = function(self, elementSettings)
-			local element = {
-				Id = os.time()*1000,
-				Destroy = function(self)
-					if self.onDestroy then
-						self.onDestroy()
-					end
-					Library.elements[self.Id] = nil
-				end
+			local genId = os.time()*1000
+            local element = {
+				Id = genId,
+                Destroy = function(self)
+                    if elementSettings.onDestroy then
+                        elementSettings.onDestroy()
+                    end
+                    Library.elements[genId] = nil
+                end
 			}
 			local constants = {
 				{"Class", elementSettings.Class}
