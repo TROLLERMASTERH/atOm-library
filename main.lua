@@ -124,7 +124,52 @@ if _G.atOm ~= nil then
 else
 	init()
 end
-
+_G.atOm.theme = {
+	windows = {
+		primaryColor = Color3.fromRGB(23, 23, 23),
+		secondaryColor = Color3.fromRGB(38, 38, 38),
+		titleColor = Color3.fromRGB(255, 255, 255),
+		buttonColor = Color3.fromRGB(255, 255, 255),
+		iconColor = Color3.fromRGB(255, 255, 255)
+	},
+	imageTileButtons = {
+		primaryColor = Color3.fromRGB(23, 23, 23),
+		hoverImageColor = Color3.fromRGB(255, 193, 37),
+		imageColor = Color3.fromRGB(255, 255, 255),
+		icon = "http://www.roblox.com/asset/?id=7005536545"
+	},
+	loaders = {
+		primaryColor = Color3.fromRGB(255, 255, 255)
+	},
+	sections = {
+		titleColor = Color3.fromRGB(255, 255, 255)
+	},
+	lines = {
+		primaryColor = Color3.fromRGB(38, 38, 38)
+	},
+	textboxes = {
+		primaryColor = Color3.fromRGB(23, 23, 23),
+		secondaryColor = Color3.fromRGB(38, 38, 38),
+		focusColor = Color3.fromRGB(255, 193, 37),
+		textColor = Color3.fromRGB(255, 255, 255)
+	},
+	switches = {
+		textColor = Color3.fromRGB(255, 255, 255),
+		primaryColor = Color3.fromRGB(38, 38, 38),
+		secondaryColor = Color3.fromRGB(255, 193, 37),
+		ballPrimaryColor = Color3.fromRGB(255, 255, 255),
+		ballSecondaryColor = Color3.fromRGB(38, 38, 38)
+	},
+	sliders = {
+		textColor = Color3.fromRGB(255, 255, 255),
+		primaryColor = Color3.fromRGB(38, 38, 38),
+		secondaryColor = Color3.fromRGB(255, 193, 37)
+	},
+	buttons = {
+		primaryColor = Color3.fromRGB(255, 193, 37),
+		textColor = Color3.fromRGB(0, 0, 0)
+	}
+}
 Library = {
 	elements = {},
 	newElement = function(self, class, settings)
@@ -136,53 +181,7 @@ Library = {
 			self.elements[element.Id] = element
 			return element
 		end
-	end,
-    theme = {
-        windows = {
-            primaryColor = Color3.fromRGB(23, 23, 23),
-            secondaryColor = Color3.fromRGB(38, 38, 38),
-            titleColor = Color3.fromRGB(255, 255, 255),
-            buttonColor = Color3.fromRGB(255, 255, 255),
-            iconColor = Color3.fromRGB(255, 255, 255)
-        },
-        imageTileButtons = {
-            primaryColor = Color3.fromRGB(23, 23, 23),
-            hoverImageColor = Color3.fromRGB(255, 193, 37),
-            imageColor = Color3.fromRGB(255, 255, 255),
-            icon = "http://www.roblox.com/asset/?id=7005536545"
-        },
-        loaders = {
-            primaryColor = Color3.fromRGB(255, 255, 255)
-        },
-        sections = {
-            titleColor = Color3.fromRGB(255, 255, 255)
-        },
-        lines = {
-            primaryColor = Color3.fromRGB(38, 38, 38)
-        },
-        textboxes = {
-            primaryColor = Color3.fromRGB(23, 23, 23),
-            secondaryColor = Color3.fromRGB(38, 38, 38),
-            focusColor = Color3.fromRGB(255, 193, 37),
-            textColor = Color3.fromRGB(255, 255, 255)
-        },
-        switches = {
-            textColor = Color3.fromRGB(255, 255, 255),
-            primaryColor = Color3.fromRGB(38, 38, 38),
-            secondaryColor = Color3.fromRGB(255, 193, 37),
-            ballPrimaryColor = Color3.fromRGB(255, 255, 255),
-            ballSecondaryColor = Color3.fromRGB(38, 38, 38)
-        },
-        sliders = {
-            textColor = Color3.fromRGB(255, 255, 255),
-            primaryColor = Color3.fromRGB(38, 38, 38),
-            secondaryColor = Color3.fromRGB(255, 193, 37)
-        },
-        buttons = {
-            primaryColor = Color3.fromRGB(255, 193, 37),
-            textColor = Color3.fromRGB(0, 0, 0)
-        }
-    }
+	end
 }
 --[[
 	Essentials

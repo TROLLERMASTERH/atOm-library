@@ -90,7 +90,7 @@ local Elements = {
                         },
                         {
                             Property = "primaryColor",
-                            Value = (Library.theme.loaders.primaryColor or Bar.BackgroundColor3),
+                            Value = (_G.atOm.theme.loaders.primaryColor or Bar.BackgroundColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 Bar.BackgroundColor3 = newValue
@@ -181,7 +181,7 @@ local Elements = {
             Title.Size = UDim2.new(0, 200, 0, 30)
             Title.Font = Enum.Font.Roboto
             Title.Text = ""
-            Title.TextColor3 = (Library.theme.sections.titleColor or Color3.fromRGB(255, 255, 255))
+            Title.TextColor3 = (_G.atOm.theme.sections.titleColor or Color3.fromRGB(255, 255, 255))
             Title.TextSize = 25.000
             Title.TextXAlignment = Enum.TextXAlignment.Left
             Title.TextYAlignment = Enum.TextYAlignment.Top
@@ -253,7 +253,7 @@ local Elements = {
             Line.Name = "Line"
             Line.Parent = Seperator
             Line.AnchorPoint = Vector2.new(0.5, 0.5)
-            Line.BackgroundColor3 = (Library.theme.lines.primaryColor or Color3.fromRGB(38, 38, 38))
+            Line.BackgroundColor3 = (_G.atOm.theme.lines.primaryColor or Color3.fromRGB(38, 38, 38))
             Line.BorderSizePixel = 0
             Line.Position = UDim2.new(0.5, 0, 0.5, 0)
             Line.Size = UDim2.new(1, -20, 0, 2)
@@ -329,8 +329,8 @@ local Elements = {
 
             TextBox_2.Name = "TextBox"
             TextBox_2.Parent = TextBox
-            TextBox_2.BackgroundColor3 = (Library.theme.textboxes.primaryColor or Color3.fromRGB(23, 23, 23))
-            TextBox_2.BorderColor3 = (Library.theme.textboxes.secondaryColor or Color3.fromRGB(38, 38, 38))
+            TextBox_2.BackgroundColor3 = (_G.atOm.theme.textboxes.primaryColor or Color3.fromRGB(23, 23, 23))
+            TextBox_2.BorderColor3 = (_G.atOm.theme.textboxes.secondaryColor or Color3.fromRGB(38, 38, 38))
             TextBox_2.Size = UDim2.new(0, 200, 0, 30)
 
             TextBox_3.Parent = TextBox_2
@@ -344,7 +344,7 @@ local Elements = {
             TextBox_3.Font = Enum.Font.Roboto
             TextBox_3.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
             TextBox_3.Text = ""
-            TextBox_3.TextColor3 = (Library.theme.textboxes.textColor or Color3.fromRGB(255, 255, 255))
+            TextBox_3.TextColor3 = (_G.atOm.theme.textboxes.textColor or Color3.fromRGB(255, 255, 255))
             TextBox_3.TextSize = 11.000
             TextBox_3.TextWrapped = true
             TextBox_3.TextXAlignment = Enum.TextXAlignment.Left
@@ -357,7 +357,7 @@ local Elements = {
             Placeholder.Size = UDim2.new(1, 0, 1, 0)
             Placeholder.Font = Enum.Font.Roboto
             Placeholder.Text = ""
-            Placeholder.TextColor3 = (Library.theme.textboxes.textColor or Color3.fromRGB(255, 255, 255))
+            Placeholder.TextColor3 = (_G.atOm.theme.textboxes.textColor or Color3.fromRGB(255, 255, 255))
             Placeholder.TextSize = 11.000
             Placeholder.TextTransparency = 0.380
             Placeholder.TextXAlignment = Enum.TextXAlignment.Left
@@ -402,7 +402,7 @@ local Elements = {
                         {
                             Property = "focusColor",
                             Occuring = true,
-                            Value = (Library.theme.textboxes.focusColor or Color3.fromRGB(255, 255, 255))
+                            Value = (_G.atOm.theme.textboxes.focusColor or Color3.fromRGB(255, 255, 255))
                         },
                         {
                             Property = "Text",
@@ -517,7 +517,7 @@ local Elements = {
             Label.Size = UDim2.new(1, 0, 0, 18)
             Label.Font = Enum.Font.Roboto
             Label.Text = ""
-            Label.TextColor3 = (Library.theme.switches.textColor or Color3.fromRGB(255, 255, 255))
+            Label.TextColor3 = (_G.atOm.theme.switches.textColor or Color3.fromRGB(255, 255, 255))
             Label.TextSize = 18.000
             Label.TextWrapped = true
             Label.TextXAlignment = Enum.TextXAlignment.Left
@@ -528,7 +528,7 @@ local Elements = {
 
             Switch_2.Name = "Switch"
             Switch_2.Parent = Switch
-            Switch_2.BackgroundColor3 = (Library.theme.switches.primaryColor or Color3.fromRGB(38, 38, 38))
+            Switch_2.BackgroundColor3 = (_G.atOm.theme.switches.primaryColor or Color3.fromRGB(38, 38, 38))
             Switch_2.Size = UDim2.new(0, 55, 0, 25)
             Switch_2.AutoButtonColor = false
             Switch_2.Font = Enum.Font.SourceSans
@@ -543,7 +543,7 @@ local Elements = {
             Ball.Name = "Ball"
             Ball.Parent = Switch_2
             Ball.AnchorPoint = Vector2.new(0, 0.5)
-            Ball.BackgroundColor3 = (Library.theme.switches.ballPrimaryColor or Color3.fromRGB(255, 255, 255))
+            Ball.BackgroundColor3 = (_G.atOm.theme.switches.ballPrimaryColor or Color3.fromRGB(255, 255, 255))
             Ball.Position = UDim2.new(0, 4, 0.5, 0)
             Ball.Size = UDim2.new(0, 21, 1, -4)
 
@@ -628,7 +628,7 @@ local Elements = {
                         },
                         {
                             Property = "secondaryColor",
-                            Value = (Library.theme.switches.secondaryColor or Color3.fromRGB(255, 193, 37)),
+                            Value = (_G.atOm.theme.switches.secondaryColor or Color3.fromRGB(255, 193, 37)),
                             onChange = function(newValue)
                                 if element.Value == true then
                                     Switch_2.BackgroundColor3 = newValue
@@ -646,7 +646,7 @@ local Elements = {
                         },
                         {
                             Property = "ballSecondaryColor",
-                            Value = (Library.theme.switches.ballSecondaryColor or Color3.fromRGB(38, 38, 38)),
+                            Value = (_G.atOm.theme.switches.ballSecondaryColor or Color3.fromRGB(38, 38, 38)),
                             onChange = function(newValue)
                                 if element.Value == true then
                                     Ball.BackgroundColor3 = newValue
@@ -725,7 +725,7 @@ local Elements = {
             Label.Size = UDim2.new(1, 0, 0, 18)
             Label.Font = Enum.Font.Roboto
             Label.Text = ""
-            Label.TextColor3 = (Library.theme.sliders.textColor or Color3.fromRGB(255, 255, 255))
+            Label.TextColor3 = (_G.atOm.theme.sliders.textColor or Color3.fromRGB(255, 255, 255))
             Label.TextSize = 18.000
             Label.TextWrapped = true
             Label.TextXAlignment = Enum.TextXAlignment.Left
@@ -747,7 +747,7 @@ local Elements = {
             Ball.Name = "Ball"
             Ball.Parent = Slider
             Ball.AnchorPoint = Vector2.new(0.5, 0.5)
-            Ball.BackgroundColor3 = (Library.theme.sliders.primaryColor or Color3.fromRGB(38, 38, 38))
+            Ball.BackgroundColor3 = (_G.atOm.theme.sliders.primaryColor or Color3.fromRGB(38, 38, 38))
             Ball.Position = UDim2.new(0, 0, 0.5, 0)
             Ball.Size = UDim2.new(0, 15, 0, 15)
             Ball.ZIndex = 2
@@ -761,14 +761,14 @@ local Elements = {
             Line.Name = "Line"
             Line.Parent = Slider
             Line.AnchorPoint = Vector2.new(0, 0.5)
-            Line.BackgroundColor3 = (Library.theme.sliders.primaryColor or Color3.fromRGB(38, 38, 38))
+            Line.BackgroundColor3 = (_G.atOm.theme.sliders.primaryColor or Color3.fromRGB(38, 38, 38))
             Line.BorderSizePixel = 0
             Line.Position = UDim2.new(0, 0, 0.5, 0)
             Line.Size = UDim2.new(1, 0, 0, 5)
 
             Filled.Name = "Filled"
             Filled.Parent = Line
-            Filled.BackgroundColor3 = (Library.theme.sliders.secondaryColor or Color3.fromRGB(255, 193, 37))
+            Filled.BackgroundColor3 = (_G.atOm.theme.sliders.secondaryColor or Color3.fromRGB(255, 193, 37))
             Filled.BorderSizePixel = 0
             Filled.Size = UDim2.new(0, 0, 1, 0)
 
@@ -948,7 +948,7 @@ local Elements = {
             local TextButton = Instance.new("TextButton")
 
             Button.Name = "Button"
-            Button.BackgroundColor3 = (Library.theme.buttons.primaryColor or Color3.fromRGB(255, 193, 37))
+            Button.BackgroundColor3 = (_G.atOm.theme.buttons.primaryColor or Color3.fromRGB(255, 193, 37))
             Button.Size = UDim2.new(0, 10, 0, 25)
 
             TextButton.Parent = Button
@@ -957,7 +957,7 @@ local Elements = {
             TextButton.Size = UDim2.new(1, 0, 1, 0)
             TextButton.Font = Enum.Font.Roboto
             TextButton.Text = ""
-            TextButton.TextColor3 = (Library.theme.buttons.textColor or Color3.fromRGB(0, 0, 0))
+            TextButton.TextColor3 = (_G.atOm.theme.buttons.textColor or Color3.fromRGB(0, 0, 0))
             TextButton.TextSize = 16.000
 
             local Destroyed = false
@@ -1134,14 +1134,14 @@ local Elements = {
                         },
                         {
                             Property = "primaryColor",
-                            Value = (Library.theme.imageTileButtons.primaryColor or Back.ImageColor3),
+                            Value = (_G.atOm.theme.imageTileButtons.primaryColor or Back.ImageColor3),
                             onChange = function(newValue)
                                 Back.ImageColor3 = newValue
                             end
                         },
                         {
                             Property = "imageColor",
-                            Value = (Library.theme.imageTileButtons.imageColor or Image.ImageColor3),
+                            Value = (_G.atOm.theme.imageTileButtons.imageColor or Image.ImageColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 Image.ImageColor3 = newValue
@@ -1160,7 +1160,7 @@ local Elements = {
                         {
                             Property = "hoverImageColor",
                             Occuring = true,
-                            Value = (Library.theme.imageTileButtons.hoverImageColor or Color3.new(200, 200, 200))
+                            Value = (_G.atOm.theme.imageTileButtons.hoverImageColor or Color3.new(200, 200, 200))
                         },
                         {
                             Property = "toolTip",
@@ -1495,7 +1495,7 @@ local Elements = {
                         },
                         {
                             Property = "primaryColor",
-                            Value = (Library.theme.windows.primaryColor or Content.BackgroundColor3),
+                            Value = (_G.atOm.theme.windows.primaryColor or Content.BackgroundColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 Content.BackgroundColor3 = newValue
@@ -1503,7 +1503,7 @@ local Elements = {
                         },
                         {
                             Property = "secondaryColor",
-                            Value = (Library.theme.windows.secondaryColor or Top.BackgroundColor3),
+                            Value = (_G.atOm.theme.windows.secondaryColor or Top.BackgroundColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 Top.BackgroundColor3 = newValue
@@ -1513,7 +1513,7 @@ local Elements = {
                         },
                         {
                             Property = "titleColor",
-                            Value = (Library.theme.windows.titleColor or Title.TextColor3),
+                            Value = (_G.atOm.theme.windows.titleColor or Title.TextColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 titleColor.TextColor3 = newValue
@@ -1521,7 +1521,7 @@ local Elements = {
                         },
                         {
                             Property = "buttonColor",
-                            Value = (Library.theme.windows.buttonColor or TextButton.ImageColor3),
+                            Value = (_G.atOm.theme.windows.buttonColor or TextButton.ImageColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 TextButton.ImageColor3 = newValue
@@ -1530,7 +1530,7 @@ local Elements = {
                         },
                         {
                             Property = "iconColor",
-                            Value = (Library.theme.windows.iconColor or ImageLabel_3.ImageColor3),
+                            Value = (_G.atOm.theme.windows.iconColor or ImageLabel_3.ImageColor3),
                             Occuring = true,
                             onChange = function(newValue)
                                 ImageLabel_3.ImageColor3 = newValue
@@ -1538,7 +1538,7 @@ local Elements = {
                         },
                         {
                             Property = "Icon",
-                            Value = (Library.theme.windows.icon or ImageLabel_3.Image),
+                            Value = (_G.atOm.theme.windows.icon or ImageLabel_3.Image),
                             Occuring = true,
                             onChange = function(newValue)
                                 ImageLabel_3.Image = newValue
