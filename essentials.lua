@@ -1559,7 +1559,12 @@ local Elements = {
                             onChange = function(newValue)
                                 WindowTitle.Text = newValue
                             end
-                        }
+                        },
+                        {
+                            Property = "closeDestroy",
+                            Value = true,
+                            Occuring = true
+                        },
                     }
                 }
             )
@@ -1572,7 +1577,11 @@ local Elements = {
 
             TextButton_2.MouseButton1Click:Connect(
                 function()
-                    element:Destroy()
+                    if element.closeDestroy then
+                        element:Destroy()
+                    else
+                        element.Visible = false
+                    end
                 end
             )
 
