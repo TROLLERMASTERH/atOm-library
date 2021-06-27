@@ -1563,7 +1563,18 @@ local Elements = {
                         {
                             Property = "closeDestroy",
                             Value = true,
-                            Occuring = true
+                            Occuring = true,
+                            onChange = function()
+                                TextButton_2.MouseButton1Click:Connect(
+                                    function()
+                                        if element.closeDestroy == true then
+                                            element:Destroy()
+                                        else
+                                            element.Visible = false
+                                        end       
+                                    end
+                                )
+                            end
                         },
                     }
                 }
@@ -1575,15 +1586,7 @@ local Elements = {
 
             local Tween
 
-            TextButton_2.MouseButton1Click:Connect(
-                function()
-                    if element.closeDestroy then
-                        element:Destroy()
-                    else
-                        element.Visible = false
-                    end
-                end
-            )
+            
 
             local onHover = function()
                 NormalInfo.BackgroundColor3 = element.secondaryColor
