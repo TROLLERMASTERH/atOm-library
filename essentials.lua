@@ -843,6 +843,7 @@ local Elements = {
                             Occuring = true,
                             Value = 1,
                             onChange = function()
+                                onChanges()
                                 refreshBar()
                             end
                         },
