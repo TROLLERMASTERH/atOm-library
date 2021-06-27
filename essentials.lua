@@ -226,7 +226,7 @@ local Elements = {
             )
 
             local updateSection = function()
-                local ContentSize = Content.UIListLayout.AbsoluteContentSize
+                local ContentSize = UIListLayout.AbsoluteContentSize
                 local addX = ContentSize.X - Section.AbsoluteSize.X
                 if addX < 0 then
                     addX = 0
@@ -1468,6 +1468,14 @@ local Elements = {
                             Occuring = true,
                             onChange = function(newValue)
                                 Window.Size = UDim2.new(0, newValue, 0, (newValue * 0.6750681198910082))
+                            end
+                        },
+                        {
+                            Property = "Visible",
+                            Value = Window.Visible,
+                            Occuring = true,
+                            onChange = function(newValue)
+                                Window.Visible = newValue
                             end
                         },
                         {
