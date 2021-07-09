@@ -1953,6 +1953,9 @@ Package.Elements = {
                                     Line.Parent = TextButton
                                     Line.BackgroundColor3 = element.primaryColor
                                     Line.BorderSizePixel = 0
+                                    if element.Alignment == "Top" then
+                                        Line.Position = UDim2.new(0, 0, 1, -1)
+                                    end
                                     Line.Size = UDim2.new(1, 0, 0, 1)
                                 end
                                 refreshDropdown()
@@ -1970,7 +1973,20 @@ Package.Elements = {
                     Background.Size = UDim2.new(1, 0, 0, Size.Y)
                     Border.Size = UDim2.new(1, 2, 0, (Size.Y + 2))
                 end
-                
+                for i,v in pairs(Content_2:GetChildren()) do
+                    if v:IsA("TextButton") and v:FindFirstChild("Line") then
+                        if element.Alignment == "Top" then
+                            v.Line.Position = UDim2.new(0, 0, 1, -1)
+                        else
+                            v.Line.Position = UDim2.new(0, 0, 0, 0)
+                        end
+                    end
+                end
+                if element.Alignment == "Top" then
+                    Line.Position = UDim2.new(0, 0, 1, -1)
+                else
+                    Line.Position = UDim2.new(0, 0, 0, 0)
+                end
             end
             
             local filterList = function(text)
