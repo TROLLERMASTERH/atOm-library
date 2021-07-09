@@ -76,6 +76,10 @@ local Package = {
             primaryColor = Color3.fromRGB(23, 23, 23),
             secondaryColor = Color3.fromRGB(38, 38, 38),
             focusColor = Color3.fromRGB(255, 193, 37)
+        },
+        {
+            primaryColor = Color3.fromRGB(255, 193, 37),
+            textColor = Color3.fromRGB(255, 255, 255)
         }
     }
 }
@@ -2250,6 +2254,391 @@ Package.Elements = {
                 end
             end)
             refreshList()            
+
+            return element
+        end
+    },
+    {
+        Class = "Tabs",
+        onCreate = function(self, elementSettings)
+
+            local Tabs = Instance.new("Frame")
+            local Top = Instance.new("Frame")
+            local UIListLayout = Instance.new("UIListLayout")
+            local Content = Instance.new("Frame")
+            local Contents = Instance.new("ScrollingFrame")
+            local UIListLayout_2 = Instance.new("UIListLayout")
+            local UIListLayout_3 = Instance.new("UIListLayout")
+
+
+            Tabs.Name = "Tabs"
+            Tabs.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            Tabs.BackgroundTransparency = 1.000
+            Tabs.BorderSizePixel = 0
+            Tabs.Size = UDim2.new(1, 0, 1, 0)
+
+            Top.Name = "Top"
+            Top.Parent = Tabs
+            Top.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            Top.BorderSizePixel = 0
+            Top.Size = UDim2.new(1, 0, 0, 40)
+
+            UIListLayout.Parent = Top
+            UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+            UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+
+            Content.Name = "Content"
+            Content.Parent = Tabs
+            Content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Content.BackgroundTransparency = 1.000
+            Content.Size = UDim2.new(1, 0, 1, -40)
+
+            Contents.Name = "Contents"
+            Contents.Parent = Content
+            Contents.Active = true
+            Contents.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Contents.BackgroundTransparency = 1.000
+            Contents.BorderSizePixel = 0
+            Contents.Size = UDim2.new(1, 0, 1, 0)
+
+            UIListLayout_2.Parent = Contents
+            UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+            UIListLayout_3.Parent = Tabs
+            UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+
+            local ScrollBarX = Instance.new("Frame")
+            local Bar = Instance.new("TextButton")
+            local ScrollBarY = Instance.new("Frame")
+            local Bar_2 = Instance.new("TextButton")
+
+            ScrollBarX.Name = "ScrollBarX"
+            ScrollBarX.Parent = Content
+            ScrollBarX.AnchorPoint = Vector2.new(0, 1)
+            ScrollBarX.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            ScrollBarX.BorderSizePixel = 0
+            ScrollBarX.Position = UDim2.new(0, 0, 1, 0)
+            ScrollBarX.Size = UDim2.new(1, 0, 0, 12)
+            ScrollBarX.Visible = false
+
+            Bar.Name = "Bar"
+            Bar.Parent = ScrollBarX
+            Bar.AnchorPoint = Vector2.new(0, 0.5)
+            Bar.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+            Bar.BorderSizePixel = 0
+            Bar.Position = UDim2.new(0, 0, 0.5, 0)
+            Bar.Size = UDim2.new(0, 100, 0, 14)
+            Bar.AutoButtonColor = false
+            Bar.Font = Enum.Font.SourceSans
+            Bar.Text = ""
+            Bar.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Bar.TextSize = 14.000
+            Bar.TextTransparency = 1.000
+
+            ScrollBarY.Name = "ScrollBarY"
+            ScrollBarY.Parent = Content
+            ScrollBarY.AnchorPoint = Vector2.new(1, 0)
+            ScrollBarY.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            ScrollBarY.BorderSizePixel = 0
+            ScrollBarY.Position = UDim2.new(1, 0, 0, 0)
+            ScrollBarY.Size = UDim2.new(0, 12, 1, 0)
+            ScrollBarY.Visible = false
+
+            Bar_2.Name = "Bar"
+            Bar_2.Parent = ScrollBarY
+            Bar_2.AnchorPoint = Vector2.new(0.5, 0)
+            Bar_2.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+            Bar_2.BorderSizePixel = 0
+            Bar_2.Position = UDim2.new(0.5, 0, 0, 0)
+            Bar_2.Size = UDim2.new(0, 14, 0, 100)
+            Bar_2.AutoButtonColor = false
+            Bar_2.Font = Enum.Font.SourceSans
+            Bar_2.Text = ""
+            Bar_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Bar_2.TextSize = 14.000
+            Bar_2.TextTransparency = 1.000
+
+            local Destroyed = false
+
+            local isDraggingY = false
+            local isDraggingX = false
+            local LastMouseMove = Vector2.new(0, 0)
+            local Thickness = 12
+
+
+
+            local refreshScrollBars = function()
+
+            end
+
+
+            local element
+            element =
+                _G.atOm:createElement(
+                {
+                    Class = self.Class,
+                    onDestroy = function()
+                        Tabs:Destroy()
+                        Destroyed = true
+                    end,
+                    userSettings = {
+                        {
+                            Property = "Parent",
+                            Value = Tabs.Parent,
+                            onChange = function(newValue)
+                                Tabs.Parent = newValue
+                                Tabs.Size = UDim2.new(1, 0, 0, newValue.AbsoluteSize.Y)
+                            end
+                        },
+                        {
+                            Property = "primaryColor",
+                            Value = (_G.atOm.theme.tabs.primaryColor or Color3.fromRGB(38, 38, 38)),
+                            onChange = function(newValue)
+                                for i,v in pairs(element.Tabs) do
+                                    v.Tab.Line.BackgroundColor3 = newValue
+                                end
+                            end
+                        },
+                        {
+                            Property = "textColor",
+                            Value = (_G.atOm.theme.tabs.textColor or Color3.fromRGB(255, 255, 255)),
+                            onChange = function(newValue)
+                                for i,v in pairs(element.Tabs) do
+                                    v.Tab.TextColor3 = newValue
+                                end
+                            end
+                        }
+                    }
+                }
+            )
+            element.tabs = {}
+            function element:createTab(self, tab)
+                --[[
+                    Tab Button
+                ]]--
+                local Tab = Instance.new("TextButton")
+                local Line = Instance.new("Frame")
+
+                Tab.Name = "Tab"
+                Tab.Parent = Top
+                Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                Tab.BackgroundTransparency = 1.000
+                Tab.BorderSizePixel = 0
+                Tab.Size = UDim2.new(0, 100, 1, -10)
+                Tab.Font = Enum.Font.RobotoCondensed
+                Tab.RichText = true
+                Tab.Text = "<b>"..tab.."</b>"
+                Tab.TextColor3 = element.textColor
+                Tab.TextSize = 13
+                Tab.TextYAlignment = Enum.TextYAlignment.Top
+                Tab.Size = UDim2.new(0, Tab.TextBounds.X + 64, 0, 30)
+
+                Line.Name = "Line"
+                Line.Parent = Tab
+                Line.BackgroundColor3 = element.primaryColor
+                Line.Position = UDim2.new(0, 0, 1, -2)
+                Line.Size = UDim2.new(1, 0, 0, 2)
+                Line.Visible = false
+                
+                
+                --[[
+                    Tab Content
+                ]]--		
+                local TabContent = Instance.new("Frame")
+                local _UIListLayout = Instance.new("UIListLayout")
+
+                TabContent.Name = "TabContent"
+                TabContent.Parent = Contents
+                TabContent.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                TabContent.BackgroundTransparency = 1.000
+                TabContent.Visible = false
+
+                _UIListLayout.Parent = TabContent
+                _UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+                
+                _UIListLayout.Changed:Connect(function(Property)
+                    if Property == "AbsoluteContentSize" then
+                        local newSize = _UIListLayout.AbsoluteContentSize
+                        TabContent.Size = UDim2.new(0, newSize.X, 0, newSize.Y)
+                    end
+                end)
+                
+                local id = HttpService:GenerateGUID(false)
+                
+                local iTab = {
+                    Content = TabContent,
+                    Tab = Tab
+                }
+                local rTab = {
+                    Content = TabContent,
+                    destroyTab = function(self)
+                        element.tabs[id] = nil
+                        Tab:Destroy()
+                        TabContent:Destroy()
+                        self = nil
+                    end,
+                    selectTab = function(self)
+                        for i,v in pairs(element.tabs) do
+                            v.Content.Visible = false
+                            v.Tab.TextColor3 = textColor
+                            v.Tab.Line.Visible = false
+                        end
+                        TabContent.Visible = true
+                        Tab.TextColor3 = primaryColor
+                        Line.Visible = true
+                    end
+                }
+                
+                self.tabs[id] = iTab
+                print(id)
+                
+                Tab.MouseButton1Click:Connect(function()
+                    for i,v in pairs(self.tabs) do
+                        v.Content.Visible = false
+                        v.Tab.TextColor3 = textColor
+                        v.Tab.Line.Visible = false
+                    end
+                    TabContent.Visible = true
+                    Tab.TextColor3 = primaryColor
+                    Line.Visible = true
+                end)
+                
+                return rTab
+            end
+
+            local refreshScrollBars = function()
+                Contents.CanvasSize =
+                    UDim2.new(0, (Contents.UIListLayout.AbsoluteContentSize.X), 0, Contents.UIListLayout.AbsoluteContentSize.Y)
+            
+                local canvas_scaleY =
+                    Contents.CanvasPosition.Y / (Contents.CanvasSize.Y.Offset - Contents.AbsoluteWindowSize.Y)
+                local Y = (1 - Bar_2.Size.Y.Scale) * canvas_scaleY
+            
+                local canvas_scaleX =
+                    Contents.CanvasPosition.X / (Contents.CanvasSize.X.Offset - Contents.AbsoluteWindowSize.X)
+                local X = (1 - Bar.Size.X.Scale) * canvas_scaleX
+            
+                local isXScroll = (Contents.UIListLayout.AbsoluteContentSize.X > Contents.AbsoluteWindowSize.X)
+                local isYScroll = (Contents.UIListLayout.AbsoluteContentSize.Y > Contents.AbsoluteWindowSize.Y)
+            
+                if isXScroll and isYScroll then
+                    ScrollBarY.Size = UDim2.new(0, Thickness, 1, -(Thickness))
+                    ScrollBarX.Size = UDim2.new(1, -(Thickness), 0, Thickness)
+                else
+                    ScrollBarY.Size = UDim2.new(0, Thickness, 1, 0)
+                    ScrollBarX.Size = UDim2.new(1, 0, 0, Thickness)
+                end
+                if isXScroll then
+                    ScrollBarX.Visible = true
+                    Bar.Size =
+                        UDim2.new(
+                            (Contents.AbsoluteWindowSize.X / Contents.CanvasSize.X.Offset),
+                            0,
+                            0,
+                            (Thickness - 4)
+                        )
+                    Bar.Position = UDim2.new(X, 0, Bar.Position.Y.Scale, 0)
+                else
+                    Bar.Size = UDim2.new(0, 0, 0, (Thickness - 4))
+                    ScrollBarX.Visible = false
+                end
+                if isYScroll then
+                    ScrollBarY.Visible = true
+                    Bar_2.Size =
+                        UDim2.new(
+                            0,
+                            (Thickness - 4),
+                            (Contents.AbsoluteWindowSize.Y / Contents.CanvasSize.Y.Offset),
+                            0
+                        )
+                    Bar_2.Position = UDim2.new(Bar_2.Position.X.Scale, 0, Y, 0)
+                else
+                    Bar_2.Size = UDim2.new(0, (Thickness - 4), 0, 0)
+                    ScrollBarY.Visible = false
+                end
+            end
+            
+            refreshScrollBars()
+            
+            Bar_2.MouseButton1Down:Connect(
+                function(x, y)
+                    LastMouseMove = Vector2.new(x, y)
+                    isDraggingY = true
+                    Bar_2.BackgroundColor3 = Color3.fromRGB(122, 122, 122)
+                end
+            )
+            Bar.MouseButton1Down:Connect(
+                function(x, y)
+                    LastMouseMove = Vector2.new(x, y)
+                    isDraggingX = true
+                    Bar.BackgroundColor3 = Color3.fromRGB(122, 122, 122)
+                end
+            )
+            
+            UserInputService.InputEnded:Connect(
+                function(input)
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                        isDraggingY = false
+                        isDraggingX = false
+                        LastMouseMove = Vector2.new(0, 0)
+                        Bar_2.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+                        Bar.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+                    end
+                end
+            )
+            UserInputService.InputChanged:Connect(
+                function(input, gameProcessed)
+                    if input.UserInputType == Enum.UserInputType.MouseMovement then
+                        local x = Mouse.X
+                        local y = Mouse.Y
+                        if
+                            isDraggingY == true and
+                                UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)
+                        then
+                            local DragY = (y - LastMouseMove.Y)
+                            LastMouseMove = Vector2.new(x, y)
+                            local scaleY = Contents.CanvasSize.Y.Offset / (Content.AbsoluteSize.Y)
+                            local newY = (Contents.CanvasPosition.Y + (DragY * scaleY))
+                            Contents.CanvasPosition = Vector2.new(Contents.CanvasPosition.X, newY)
+                        elseif
+                            isDraggingX == true and
+                                UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)
+                        then
+                            local DragX = (x - LastMouseMove.X)
+                            LastMouseMove = Vector2.new(x, y)
+                            local scaleX = Contents.CanvasSize.X.Offset / (Content.AbsoluteSize.X)
+                            local newX = (Contents.CanvasPosition.X + (DragX * scaleX))
+                            Contents.CanvasPosition = Vector2.new(newX, Contents.CanvasPosition.Y)
+                        elseif
+                            (isDraggingY == true or isDraggingX == true) and
+                                not UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)
+                        then
+                            isDraggingY = false
+                            isDraggingY = false
+                            LastMouseMove = Vector2.new(0, 0)
+                            Bar_2.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+                            Bar.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+                        end
+                    end
+                end
+            )
+            
+            Contents.UIListLayout.Changed:Connect(
+                function()
+                    Contents.CanvasSize =
+                        UDim2.new(0, (Contents.UIListLayout.AbsoluteContentSize.X - Thickness), 0, Contents.UIListLayout.AbsoluteContentSize.Y - Thickness)
+                end
+            )
+            
+            Contents.Changed:Connect(
+                function()
+                    refreshScrollBars()
+                end
+            )
+            Contents.CanvasSize =
+                UDim2.new(0, (Contents.UIListLayout.AbsoluteContentSize.X - Thickness), 0, Contents.UIListLayout.AbsoluteContentSize.Y - Thickness)
+                       
 
             return element
         end
