@@ -5,7 +5,7 @@
 	██╔══██║░░░██║░░░██║░░██║██║╚██╔╝██║
 	██║░░██║░░░██║░░░╚█████╔╝██║░╚═╝░██║
 	╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░░░░╚═╝
-					    v1
+					    v1.5
 	Gui Library - Main
 	This is the corescript for making gui elements
 ]]--
@@ -18,7 +18,7 @@
 
 local Library
 
-local Version = 1
+local Version = 1.5
 _G.atOm = nil
 --[[
 	Library Returnable
@@ -181,11 +181,23 @@ Library = {
 			self.elements[element.Id] = element
 			return element
 		end
+	end,
+	loadPackage = function(self, package)
+		print("atOm: loaded package '"..Package.Name.."'")
+		for i,v in pairs(Package.Theme) do
+			_G.atOm.theme[i] = v
+		end
+		for i,v in pairs(Package.Elements) do
+			_G.atOm:createNewElementClass(v)
+		end
 	end
 }
+
 --[[
-	Essentials
+	Essentials Package
 ]]--
-loadstring(game:HttpGet('https://raw.githubusercontent.com/TROLLERMASTERH/atOm-library/main/essentials.lua?flush_cache=True'))()
+
+Library:loadPackage(loadstring(game:HttpGet('https://raw.githubusercontent.com/TROLLERMASTERH/atOm-library/main/essentials.lua?flush_cache=True'))())
+
 
 return Library
