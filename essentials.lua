@@ -77,7 +77,7 @@ local Package = {
             secondaryColor = Color3.fromRGB(38, 38, 38),
             focusColor = Color3.fromRGB(255, 193, 37)
         },
-        {
+        tabs = {
             primaryColor = Color3.fromRGB(255, 193, 37),
             textColor = Color3.fromRGB(255, 255, 255)
         }
