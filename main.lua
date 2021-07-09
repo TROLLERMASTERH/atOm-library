@@ -182,7 +182,7 @@ Library = {
 			return element
 		end
 	end,
-	loadPackage = function(self, package)
+	loadPackage = function(self, Package)
 		print("atOm: loaded package '"..Package.Name.."'")
 		for i,v in pairs(Package.Theme) do
 			_G.atOm.theme[i] = v
