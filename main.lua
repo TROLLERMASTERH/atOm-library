@@ -10,6 +10,16 @@
 	This is the corescript for making gui elements
 ]]--
 
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Mouse = Player:GetMouse()
+local GuiLocation = game.CoreGui
+local HttpService = game:GetService("HttpService")
+
 --[[
 
 	Element class creator
