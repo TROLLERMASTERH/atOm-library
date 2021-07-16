@@ -5,7 +5,7 @@
 	██╔══██║░░░██║░░░██║░░██║██║╚██╔╝██║
 	██║░░██║░░░██║░░░╚█████╔╝██║░╚═╝░██║
 	╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░░░░╚═╝
-					    v1.6
+					    v1.5
 	Gui Library - Main
 	This is the corescript for making gui elements
 ]]--
@@ -18,7 +18,7 @@
 
 local Library
 
-local Version = 1.6
+local Version = 1.5
 _G.atOm = nil
 --[[
 	Library Returnable
@@ -40,7 +40,7 @@ local function init()
 			table.insert(self.elementClasses, elem)
 		end,
 		createElement = function(self, elementSettings)
-			local genId = os.time()*1000
+			local genId = HttpService:GenerateGUID(false)
             local element = {
 				Id = genId,
                 Destroy = function(self)
@@ -64,6 +64,12 @@ local function init()
 				end
 				table.insert(variables, v)
 			end
+            if elementSettings.userFunctions then
+                for i,v in pairs(elementSettings.userFunctions) do
+                    print(v.Index..": Done")
+                    element[v.Index] = v.Function
+                end
+            end
 			setmetatable(element, {
 				__newindex = function(self, key, value)
 					for i,v in pairs(variables) do
