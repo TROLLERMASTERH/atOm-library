@@ -1,12 +1,16 @@
 --[[
   Essentials Built-In Elements
 ]] --
+
 local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
+local GuiLocation = game.CoreGui
+local HttpService = game:GetService("HttpService")
 
 --[[
     Mouse Library
@@ -2023,6 +2027,12 @@ Package.Elements = {
                     ImageLabel.ImageColor3 = element.focusColor
                     ImageLabel.Image = "http://www.roblox.com/asset/?id=4978037290"
                     List.Visible = true
+                    Dropdown.ZIndex = 2
+                    for i,v in pairs(Dropdown:GetDescendants()) do
+                        if v:IsA("GuiObject") then
+                            v.ZIndex = 2
+                        end
+                    end
                     resizeBorder(Vector2.new(Dropdown.AbsoluteSize.X, (Dropdown.AbsoluteSize.Y + List.AbsoluteSize.Y)))
                 else
                     if selected ~= nil then
@@ -2042,6 +2052,12 @@ Package.Elements = {
                     ImageLabel.ImageColor3 = element.textColor
                     ImageLabel.Image = "http://www.roblox.com/asset/?id=4978038300"
                     List.Visible = false
+                    Dropdown.ZIndex = 1
+                    for i,v in pairs(Dropdown:GetDescendants()) do
+                        if v:IsA("GuiObject") then
+                            v.ZIndex = 1
+                        end
+                    end
                     resizeBorder(Vector2.new(Dropdown.AbsoluteSize.X, (Dropdown.AbsoluteSize.Y)))
                 end
             end
@@ -2282,6 +2298,7 @@ Package.Elements = {
             Top.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
             Top.BorderSizePixel = 0
             Top.Size = UDim2.new(1, 0, 0, 40)
+            Top.LayoutOrder = 1
 
             UIListLayout.Parent = Top
             UIListLayout.FillDirection = Enum.FillDirection.Horizontal
@@ -2293,6 +2310,7 @@ Package.Elements = {
             Content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Content.BackgroundTransparency = 1.000
             Content.Size = UDim2.new(1, 0, 1, -40)
+            Content.LayoutOrder = 2
 
             Contents.Name = "Contents"
             Contents.Parent = Content
@@ -2382,13 +2400,111 @@ Package.Elements = {
                         Tabs:Destroy()
                         Destroyed = true
                     end,
+                    userFunctions = {
+                        {
+                            Index = "createTab",
+                            Function = function(tab)
+                                --[[
+                                    Tab Button
+                                ]]--
+                                local Tab = Instance.new("TextButton")
+                                local Line = Instance.new("Frame")
+                
+                                Tab.Name = "Tab"
+                                Tab.Parent = Top
+                                Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                                Tab.BackgroundTransparency = 1.000
+                                Tab.BorderSizePixel = 0
+                                Tab.Size = UDim2.new(0, 100, 1, -10)
+                                Tab.Font = Enum.Font.RobotoCondensed
+                                Tab.RichText = true
+                                Tab.Text = "<b>"..tab.."</b>"
+                                Tab.TextColor3 = element.textColor
+                                Tab.TextSize = 16
+                                Tab.TextYAlignment = Enum.TextYAlignment.Top
+                                Tab.Size = UDim2.new(0, Tab.TextBounds.X + 38, 0, 30)
+                
+                                Line.Name = "Line"
+                                Line.Parent = Tab
+                                Line.BackgroundColor3 = element.primaryColor
+                                Line.Position = UDim2.new(0, 0, 1, -2)
+                                Line.Size = UDim2.new(1, 0, 0, 2)
+                                Line.Visible = false
+                                
+                                
+                                --[[
+                                    Tab Content
+                                ]]--		
+                                local TabContent = Instance.new("Frame")
+                                local _UIListLayout = Instance.new("UIListLayout")
+                
+                                TabContent.Name = "TabContent"
+                                TabContent.Parent = Contents
+                                TabContent.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                                TabContent.BackgroundTransparency = 1.000
+                                TabContent.Visible = false
+                
+                                _UIListLayout.Parent = TabContent
+                                _UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+                                _UIListLayout.Padding = UDim.new(0, 10)
+                                
+                                _UIListLayout.Changed:Connect(function(Property)
+                                    if Property == "AbsoluteContentSize" then
+                                        local newSize = _UIListLayout.AbsoluteContentSize
+                                        TabContent.Size = UDim2.new(0, newSize.X, 0, newSize.Y)
+                                    end
+                                end)
+                                
+                                local id = HttpService:GenerateGUID(false)
+                                
+                                local iTab = {
+                                    Content = TabContent,
+                                    Tab = Tab
+                                }
+                                local rTab = {
+                                    Content = TabContent,
+                                    destroyTab = function(self)
+                                        element.tabs[id] = nil
+                                        Tab:Destroy()
+                                        TabContent:Destroy()
+                                        self = nil
+                                    end,
+                                    selectTab = function(self)
+                                        for i,v in pairs(element.tabs) do
+                                            v.Content.Visible = false
+                                            v.Tab.TextColor3 = element.textColor
+                                            v.Tab.Line.Visible = false
+                                        end
+                                        TabContent.Visible = true
+                                        Tab.TextColor3 = element.primaryColor
+                                        Line.Visible = true
+                                    end
+                                }
+                                
+                                element.tabs[id] = iTab
+                                
+                                Tab.MouseButton1Click:Connect(function()
+                                    for i,v in pairs(element.tabs) do
+                                        v.Content.Visible = false
+                                        v.Tab.TextColor3 = element.textColor
+                                        v.Tab.Line.Visible = false
+                                    end
+                                    TabContent.Visible = true
+                                    Tab.TextColor3 = element.primaryColor
+                                    Line.Visible = true
+                                end)
+                                
+                                return rTab
+                            end
+                        }
+                    },
                     userSettings = {
                         {
                             Property = "Parent",
                             Value = Tabs.Parent,
                             onChange = function(newValue)
                                 Tabs.Parent = newValue
-                                Tabs.Size = UDim2.new(1, 0, 0, newValue.AbsoluteSize.Y)
+                                Tabs.Size = UDim2.new(1, -1, 0, newValue.AbsoluteSize.Y)
                             end
                         },
                         {
@@ -2408,104 +2524,15 @@ Package.Elements = {
                                     v.Tab.TextColor3 = newValue
                                 end
                             end
+                        },
+                        {
+                            Property = "tabs",
+                            Value = {},
+                            Occuring = true
                         }
                     }
                 }
             )
-            element.tabs = {}
-            function element:createTab(self, tab)
-                --[[
-                    Tab Button
-                ]]--
-                local Tab = Instance.new("TextButton")
-                local Line = Instance.new("Frame")
-
-                Tab.Name = "Tab"
-                Tab.Parent = Top
-                Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                Tab.BackgroundTransparency = 1.000
-                Tab.BorderSizePixel = 0
-                Tab.Size = UDim2.new(0, 100, 1, -10)
-                Tab.Font = Enum.Font.RobotoCondensed
-                Tab.RichText = true
-                Tab.Text = "<b>"..tab.."</b>"
-                Tab.TextColor3 = element.textColor
-                Tab.TextSize = 13
-                Tab.TextYAlignment = Enum.TextYAlignment.Top
-                Tab.Size = UDim2.new(0, Tab.TextBounds.X + 64, 0, 30)
-
-                Line.Name = "Line"
-                Line.Parent = Tab
-                Line.BackgroundColor3 = element.primaryColor
-                Line.Position = UDim2.new(0, 0, 1, -2)
-                Line.Size = UDim2.new(1, 0, 0, 2)
-                Line.Visible = false
-                
-                
-                --[[
-                    Tab Content
-                ]]--		
-                local TabContent = Instance.new("Frame")
-                local _UIListLayout = Instance.new("UIListLayout")
-
-                TabContent.Name = "TabContent"
-                TabContent.Parent = Contents
-                TabContent.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                TabContent.BackgroundTransparency = 1.000
-                TabContent.Visible = false
-
-                _UIListLayout.Parent = TabContent
-                _UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-                
-                _UIListLayout.Changed:Connect(function(Property)
-                    if Property == "AbsoluteContentSize" then
-                        local newSize = _UIListLayout.AbsoluteContentSize
-                        TabContent.Size = UDim2.new(0, newSize.X, 0, newSize.Y)
-                    end
-                end)
-                
-                local id = HttpService:GenerateGUID(false)
-                
-                local iTab = {
-                    Content = TabContent,
-                    Tab = Tab
-                }
-                local rTab = {
-                    Content = TabContent,
-                    destroyTab = function(self)
-                        element.tabs[id] = nil
-                        Tab:Destroy()
-                        TabContent:Destroy()
-                        self = nil
-                    end,
-                    selectTab = function(self)
-                        for i,v in pairs(element.tabs) do
-                            v.Content.Visible = false
-                            v.Tab.TextColor3 = textColor
-                            v.Tab.Line.Visible = false
-                        end
-                        TabContent.Visible = true
-                        Tab.TextColor3 = primaryColor
-                        Line.Visible = true
-                    end
-                }
-                
-                self.tabs[id] = iTab
-                print(id)
-                
-                Tab.MouseButton1Click:Connect(function()
-                    for i,v in pairs(self.tabs) do
-                        v.Content.Visible = false
-                        v.Tab.TextColor3 = textColor
-                        v.Tab.Line.Visible = false
-                    end
-                    TabContent.Visible = true
-                    Tab.TextColor3 = primaryColor
-                    Line.Visible = true
-                end)
-                
-                return rTab
-            end
 
             local refreshScrollBars = function()
                 Contents.CanvasSize =
@@ -2626,6 +2653,7 @@ Package.Elements = {
             
             Contents.UIListLayout.Changed:Connect(
                 function()
+                    print("change")
                     Contents.CanvasSize =
                         UDim2.new(0, (Contents.UIListLayout.AbsoluteContentSize.X - Thickness), 0, Contents.UIListLayout.AbsoluteContentSize.Y - Thickness)
                 end
