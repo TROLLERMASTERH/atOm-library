@@ -1129,12 +1129,10 @@ Package.Elements = {
 			Slider.Size = UDim2.new(0, 200, 0, 25)
 
 			Ball.Name = "Ball"
-			Ball.Parent = Slider
 			Ball.AnchorPoint = Vector2.new(0.5, 0.5)
 			Ball.BackgroundColor3 = (_G.atOm.theme.sliders.primaryColor or Color3.fromRGB(38, 38, 38))
 			Ball.Position = UDim2.new(0, 0, 0.5, 0)
 			Ball.Size = UDim2.new(0, 15, 0, 15)
-			Ball.ZIndex = 2
 			Ball.AutoButtonColor = false
 			Ball.Font = Enum.Font.SourceSans
 			Ball.Text = ""
@@ -1149,6 +1147,8 @@ Package.Elements = {
 			Line.BorderSizePixel = 0
 			Line.Position = UDim2.new(0, 0, 0.5, 0)
 			Line.Size = UDim2.new(1, 0, 0, 5)
+			
+			Ball.Parent = Slider
 
 			Filled.Name = "Filled"
 			Filled.Parent = Line
@@ -2475,8 +2475,7 @@ Package.Elements = {
 								Tab.BorderSizePixel = 0
 								Tab.Size = UDim2.new(0, 100, 1, -10)
 								Tab.Font = Enum.Font.RobotoCondensed
-								Tab.RichText = true
-								Tab.Text = "<b>"..tab.."</b>"
+								Tab.Text = tab
 								Tab.TextColor3 = element.textColor
 								Tab.TextSize = 16
 								Tab.TextYAlignment = Enum.TextYAlignment.Top
